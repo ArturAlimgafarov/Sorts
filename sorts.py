@@ -39,3 +39,20 @@ def quickSort(list):
     sortedList = list.copy()
     qSort(sortedList, 0, len(list) - 1)
     return sortedList
+def mergeSort(list):
+    def merge(left, right):
+        sortedList = []
+        i = j = 0
+        while i < len(left) and j < len(right):
+            if right[j] < left[i]:
+                sortedList.append(right[j])
+                j += 1
+            else:
+                sortedList.append(left[i])
+                i += 1
+        return sortedList + left[i:] if i < len(left) else sortedList + right[j:]
+    if len(list) <= 1:
+        return list
+    mid = len(list) // 2
+    L, R = mergeSort(list[:mid]), mergeSort(list[mid:])
+    return merge(L, R)
