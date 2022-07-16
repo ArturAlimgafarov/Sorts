@@ -56,3 +56,23 @@ def mergeSort(list):
     mid = len(list) // 2
     L, R = mergeSort(list[:mid]), mergeSort(list[mid:])
     return merge(L, R)
+def heapSort(list):
+    def heapify(list, n, i):
+        node = i
+        left = 2 * i + 1
+        right = 2 * i + 2
+        if (left < n) and (list[left] > list[node]):
+            node = left
+        if (right < n) and (list[right] > list[node]):
+            node = right
+        if node != i:
+            list[node], list[i] = list[i], list[node]
+            heapify(list, n, node)
+
+    sortedList = list.copy()
+    for i in range(len(list), -1, -1):
+        heapify(sortedList, len(list), i)
+    for i in range(len(list) - 1, -1, -1):
+        sortedList[0], sortedList[i] = sortedList[i], sortedList[0]
+        heapify(sortedList, i, 0)
+    return sortedList
