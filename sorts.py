@@ -76,3 +76,9 @@ def heapSort(list):
         sortedList[0], sortedList[i] = sortedList[i], sortedList[0]
         heapify(sortedList, i, 0)
     return sortedList
+def countingSort(list):
+    sortedList = []
+    for i in range(min(list), max(list) + 1):
+        count = list.count(i)
+        sortedList += [i for _ in range(count)]
+    return sortedList
